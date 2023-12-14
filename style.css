@@ -1,5 +1,9 @@
 body {
   background-color: black;
+  color: white;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial;
 }
 h1 {
   color: white;
@@ -10,4 +14,63 @@ h2 {
   color: white;
   text-align: center;
   font-family: Arial;
+}
+
+.animated-text{
+  font-size: 24px;
+  font-weight: 600;
+  min-width: 280px;
+  text-align: center;
+}
+
+.animated-text span{
+  position: relative;
+}
+
+.animated-text span::before{
+  content: "am a MATLAB Developer";
+  color: white;
+  animation: words 25s infinite;
+}
+
+.animated-text span::after{
+  content: "";
+  position: absolute;
+  width: calc(100% + 8px);
+  height: 120%;
+  background-color: #000000;
+  border-left: 2px solid white;
+  right: -8px;
+  animation: cursor 0.8s infinite, typing 25s steps(14) infinite;
+}
+@keyframes cursor {
+  to{
+      border-left: 2px solid #000000;
+  }
+}
+
+@keyframes words {
+  0%,20%{
+      content: "am a MATLAB Developer";
+  }
+  21%,40%{
+      content: "can create GUI";
+  }
+  41%,60%{
+      content: "can do Mathematical Modeling";
+  }
+  61%,80%{
+      content: "can create ML Models";
+  }
+  81%,100%{
+      content: "can do Image Processing";
+  }
+}
+@keyframes typing {
+  10%,15%,30%,35%,50%,55%,70%,75%,90%,95%{
+      width: 0;
+  }
+  5%,20%,25%,40%,45%,60%,65%,80%,85%{
+      width: calc(100% + 8px);
+  }
 }
