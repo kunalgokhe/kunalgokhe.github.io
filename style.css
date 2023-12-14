@@ -28,7 +28,7 @@ h2 {
 }
 
 .animated-text span::before{
-  content: "am a MATLAB Developer";
+  content: "am a MATLAB Developer       ";
   color: white;
   animation: words 25s infinite;
 }
@@ -51,19 +51,19 @@ h2 {
 
 @keyframes words {
   0%,20%{
-      content: "am a MATLAB Developer";
+      content: "am a MATLAB Developer       ";
   }
   21%,40%{
-      content: "can create GUI";
+      content: "can create GUI              ";
   }
   41%,60%{
       content: "can do Mathematical Modeling";
   }
   61%,80%{
-      content: "can create ML Models";
+      content: "can create ML Models        ";
   }
   81%,100%{
-      content: "can do Image Processing";
+      content: "can do Image Processing     ";
   }
 }
 @keyframes typing {
