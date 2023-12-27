@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newton Raphson Method</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0px;
+            padding: 0px;
+            padding-left: 100px;
+            padding-top: 30Px;
+            padding-right: 100px;
+            background-color: black;
+            color: white;
+            line-height: 24px;
+        }
+        div.bigspace{
+            line-height: 44px;
+        }
+        h1{
+            color: rgb(192, 76, 11);
+        }
+        .center {
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+          width: 50%;
+        }
+        
+    </style>
+</head>
+<body>
+    
+    <header>
+        <h1>Newton Raphson Method</h1>
+    </header>
+
+    <main>
+        <p>The Newton-Raphson Method stands out as a widely adopted approach for determining the roots of equations. 
+            It can be adeptly extended to ascertain solutions for a system of equations. 
+            Furthermore, its convergence towards the root showcases a quadratic progression as the solution is approached.
+        </p>
+        
+        <div>
+            Let's consider the continous function \(f\) and its derivative \(f'\) and initial guess \(x_0\)<br>
+            \[
+                x_1 = x_0-\frac{f(x_0)}{f'(x_0)}
+            \]
+        </div>
+
+        <div>
+            Steps to find the root:
+            <ul>
+                <li>Assume \(x_0\) be the approximate root of \(f(x)=0\)</li>
+                <li>Find next value \(x_1\)</li>
+                <li>Repeat above two steps until \(f(x)=0\)</li>
+            </ul>
+
+            <!-- SPerate Equation on new line   -->
+            <!-- \[
+                \int_{a}^{b} x^2 \, dx
+            \] -->
+        </div>
+ 
+        Example: Consider a function \(f(x)=0.2x^2+x-2\)<br>
+
+        <img src="NRM1.gif" style="width: 1200px;height: 550px" class="center">
+
+        <div class="bigspace">
+            
+            \(f'(x)=0.4x+x\)<br>
+            We have \(x_0=5\)<br>
+            \(1^{st}\) Iteration:<br>
+            \(x_1 = x_0-\frac{f(x_0)}{f'(x_0)}\)<br>
+            \(x_1 = 5-\frac{f(5)}{f'(5)}\)<br>
+            \(x_1 = 5-\frac{8}{3}\)<br>
+            \(x_1 = 2.3333\)<br>
+            Now, for next iterations.<br>
+
+        </div>
+
+        <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>\(Iteration\)</th>
+                    <th>\(~~~~~~~~~x~~~~~~~\)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>\(~~~~~1^{st}\)</td>
+                    <td>\(~~~~~2.3333\)</td>
+                </tr>
+                <tr>
+                    <td>\(~~~~~2^{nd}\)</td>
+                    <td>\(~~~~~1.5977\)</td>
+                </tr>
+                <tr>
+                    <td>\(~~~~~3^{rd}\)</td>
+                    <td>\(~~~~~1.5317\)</td>
+                </tr>
+                <tr>
+                    <td>\(~~~~~4^{th}\)</td>
+                    <td>\(~~~~~1.5311\)</td>
+                </tr>
+                
+                
+            </tbody>
+        </table>
+        </div>
+
+        <br>
+        Example: Consider a function \(f(x)=0.2x^2+x-2\) with initial value \(x_0=-1\)<br>
+
+        <img src="NRM2.gif" style="width: 1200px;height: 550px" class="center">
+
+        <div class="bigspace">
+            
+            \(f'(x)=0.4x+x\)<br>
+            We have \(x_0=-1\)<br>
+            \(1^{st}\) Iteration:<br>
+            \(x_1 = x_0-\frac{f(x_0)}{f'(x_0)}\)<br>
+            \(x_1 = -1-\frac{f(-1)}{f'(-1)}\)<br>
+            \(x_1 = -1-\frac{-2.8}{0.6}\)<br>
+            \(x_1 = 3.6667\)<br>
+            Now, for next iterations.<br>
+
+        </div>
+
+        <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>\(Iteration\)</th>
+                    <th>\(~~~~~~~~~x~~~~~~~\)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>\(~~~~~1^{st}\)</td>
+                    <td>\(~~~~~3.6667\)</td>
+                </tr>
+                <tr>
+                    <td>\(~~~~~2^{nd}\)</td>
+                    <td>\(~~~~~1.9009\)</td>
+                </tr>
+                <tr>
+                    <td>\(~~~~~3^{rd}\)</td>
+                    <td>\(~~~~~1.5467\)</td>
+                </tr>
+                <tr>
+                    <td>\(~~~~~4^{th}\)</td>
+                    <td>\(~~~~~1.5312\)</td>
+                </tr>
+                <tr>
+                    <td>\(~~~~~5^{th}\)</td>
+                    <td>\(~~~~~1.5311\)</td>
+                </tr>
+                
+            </tbody>
+        </table>
+
+        We can stop the iteration here as the \(f(x)\) is closed to zero, so the root of the equation is \(x=1.5311\).<br>
+        <br>
+        <br>
+
+        </div>
+
+
+    </main>
+</body>
+</html>
