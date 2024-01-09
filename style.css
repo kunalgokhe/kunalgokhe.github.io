@@ -15,6 +15,23 @@ h2 {
   text-align: center;
   font-family: Arial;
 }
+.counter{
+  color: rgb(192, 76, 11);
+  font-family: Arial;
+  font-size: 15px;
+  float: right;
+  right: 15px;
+  top: 0px;
+}
+
+/* Styles for website counter container */
+.website-counter {
+  color: white;
+  font-family: Arial;
+  font-size: 15px;
+  float: right;
+  right: 10px;
+}
 
 .animated-text{
   font-size: 24px;
