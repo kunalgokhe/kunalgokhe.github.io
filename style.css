@@ -16,7 +16,7 @@ h2 {
   font-family: Arial;
 }
 .counter{
-  color: rgb(192, 76, 11);
+  color: white;
   font-family: Arial;
   font-size: 15px;
   float: right;
@@ -26,7 +26,7 @@ h2 {
 
 /* Styles for website counter container */
 .website-counter {
-  color: white;
+  color: rgb(192, 76, 11);
   font-family: Arial;
   font-size: 15px;
   float: right;
