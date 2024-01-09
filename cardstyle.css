@@ -55,7 +55,7 @@
     right: 15px;
     bottom: 15px;
     left: 15px;
-    top: 300px;
+    top: 280px;
     text-align: center;
     color: #ffffff;
     font-size: 14px;
@@ -67,7 +67,7 @@
     transform: translateY(-10px);
 }
 .glassBox:hover .glassBox__imgBox img {
-    transform: translate(-10px,-10px) rotate(-10deg) scale(1.1);
+    transform: translate(0px,-10px) rotate(0deg) scale(1.1);
 }
 
 .column {

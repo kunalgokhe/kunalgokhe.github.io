@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bisection Method</title>
+    <title>Regula Falsi Method</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
@@ -36,25 +36,29 @@
 <body>
     
     <header>
-        <h1>Bisection Method</h1>
+        <h1>Regula Falsi Method</h1>
     </header>
 
     <main>
-        <p>The bisection method is used to find the roots of a polynomial equation. 
-            It separates the interval and subdivides the interval in which the root of the equation lies. 
-            The principle behind this method is the intermediate theorem for continuous functions.
+        <p>
+            The Regula Falsi Method also known as False Position Method, 
+            The test value is modified in accordance with the result using a trial-and-error 
+            methodology that uses false values for the variable.
         </p>
         
         <div>
             Let's consider the continous function \(f\) in closed interval \([a,b]\) is given with  
-            and  of different signs. Then by intermediate theorem, there exists a point \(c\) belong to  for which \(f(c)=0\).
+            and  of different signs. 
         </div>
 
         <div>
             Steps to find the root:
             <ul>
                 <li>Find two points \(a\) and \(b\) such that \(f(a) \times f(b) < 0 \)</li>
-                <li>Find midpoint of \(a\) and \(b\), say \(c\)</li>
+                <li>
+                    Find midpoint of \(a\) and \(b\), say \(c\) 
+                    \[c=\frac{a~f(b)-b~f(a)}{f(b)-f(a)}\]
+                </li>
                 <li>If \(f(c) \times f(a) < 0 \), there exist a root between \(c\) and \(a\). else if \(f(c) \times f(b) < 0 \) there exist a root between \(c\) and \(b\).</li>
                 <li>Repeat above three steps until \(f(c)=0\)</li>
             </ul>
@@ -65,57 +69,37 @@
             \] -->
         </div>
         
-        <img src="BM1.gif" style="width: 1200px;height: 550px" class="center">
+        <img src="RFM.gif" style="width: 1250px;height: 650px" class="center">
 
         <div class="bigspace">
-            Example: Consider a function \(f(x)=0.5x^3+0.1x^2-2\)<br>
-            Assume, \(a=-2, b=3\)<br>
-            We have \(f(a)=-14.6,f(b)=12.4\)<br>
+            Example: Consider a function \(f(x)=2 e^x sin(x)-3\)<br>
+            Assume, \(a=-1.5, b=1\)<br>
+            We have \(f(a)=-3.4451,f(b)=1.5747\)<br>
             \(1^{st}\) Iteration:<br>
-            \(c=\frac{a+b}{2}=\frac{-2+3}{2}=0.5\)<br>
-            \(f(c)=-1.9125\)<br>
+            \(c=\frac{a~f(b)-b~f(a)}{f(b)-f(a)}=\frac{-1.5~f(1)-1~f(-1.5)}{f(1)-f(-1.5)}=0.2158\)<br>
+            \(f(c)=-2.4687\)<br>
             Now, replace \(a=c\)<br>
 
             \(2^{nd}\) Iteration:<br>
-            \(c=\frac{a+b}{2}=\frac{0.5+3}{2}=1.75\)<br>
-            \(f(c)=0.9859\)<br>
-            Now, replace \(b=c\)<br>
+            \(c=\frac{a~f(b)-b~f(a)}{f(b)-f(a)}=\frac{0.2158~f(1)-1~f(0.2158)}{f(1)-f(0.2158)}=0.6946\)<br>
+            \(f(c)=-0.4361\)<br>
+            Now, replace \(a=c\)<br>
 
             \(3^{rd}\) Iteration:<br>
-            \(c=\frac{a+b}{2}=\frac{0.5+1.75}{2}=1.125\)<br>
-            \(f(c)=-1.1615\)<br>
+            \(c=\frac{a~f(b)-b~f(a)}{f(b)-f(a)}=\frac{0.6946~f(1)-1~f(0.6946)}{f(1)-f(0.6946)}=0.7608\)<br>
+            \(f(c)=-0.0489\)<br>
             Now, replace \(a=c\)<br>
 
             \(4^{th}\) Iteration:<br>
-            \(c=\frac{a+b}{2}=\frac{1.125+1.75}{2}=1.4375\)<br>
-            \(f(c)=-0.3081\)<br>
+            \(c=\frac{a~f(b)-b~f(a)}{f(b)-f(a)}=\frac{0.7608~f(1)-1~f(0.7608)}{f(1)-f(0.7608)}=0.7680\)<br>
+            \(f(c)=-0.0051\)<br>
             Now, replace \(a=c\)<br>
 
             \(5^{th}\) Iteration:<br>
-            \(c=\frac{a+b}{2}=\frac{1.4375+1.75}{2}=1.5938\)<br>
-            \(f(c)=0.2781\)<br>
-            Now, replace \(b=c\)<br>
+            \(c=\frac{a~f(b)-b~f(a)}{f(b)-f(a)}=\frac{0.7680~f(1)-1~f(0.7680)}{f(1)-f(0.7680)}=0.7688\)<br>
+            \(f(c)=-5.3776e-04\)<br>
 
-            \(6^{th}\) Iteration:<br>
-            \(c=\frac{a+b}{2}=\frac{1.4375+1.5938}{2}=1.5156\)<br>
-            \(f(c)=-0.0294\)<br>
-            Now, replace \(a=c\)<br>
-
-            \(7^{th}\) Iteration:<br>
-            \(c=\frac{a+b}{2}=\frac{1.5156+1.5938}{2}=1.5547\)<br>
-            \(f(c)=0.1206\)<br>
-            Now, replace \(b=c\)<br>
-
-            \(8^{th}\) Iteration:<br>
-            \(c=\frac{a+b}{2}=\frac{1.5156+1.5547}{2}=1.5352\)<br>
-            \(f(c)=0.0446\)<br>
-            Now, replace \(b=c\)<br>
-
-            \(9^{th}\) Iteration:<br>
-            \(c=\frac{a+b}{2}=\frac{1.5156+1.5352}{2}=1.5254\)<br>
-            \(f(c)=0.0074\)<br>
-
-            We can stop the iteration here as the \(f(c)\) is closed to zero, so the root of the equation is \(c=1.5254\).<br>
+            We can stop the iteration here as the \(f(c)\) is closed to zero, so the root of the equation is \(c=0.7688\).<br>
             <br>
         </div>
 
