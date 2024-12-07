@@ -1,0 +1,72 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0px;
+    padding: 0px;
+    padding-left: 100px;
+    padding-top: 30Px;
+    padding-right: 100px;
+    background-color: black;
+    color: white;
+    line-height: 24px;
+    cursor: none;
+    text-align: justify;
+}
+div.bigspace{
+    line-height: 44px;
+}
+h1{
+    color: rgb(192, 76, 11);
+}
+h2{
+    color: rgb(192, 76, 11);
+}
+h3{
+    color: rgb(192, 76, 11);
+}
+.centerapp {
+  display: block;
+  margin-left: 37.5%;
+}
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  }
+#canvas {
+    width: 220px;
+    height: 220px;
+    background-color: black;
+    cursor: none;
+    border-radius: 5%;
+    border: 1px solid white;
+}
+#clearButton {
+    margin-top: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    display: block;
+    padding: 10px 30px;
+    font-size: 16px;
+    background-color: rgb(192, 76, 11);
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: none;
+}
+#clearButton:hover{
+    background-color: #fff;
+    color: rgb(192, 76, 11);
+    cursor: none;
+}
+#barChart{
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 350px;
+    border: 1px solid white;
+}

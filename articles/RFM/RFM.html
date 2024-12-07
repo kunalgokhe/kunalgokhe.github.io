@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regula Falsi Method</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0px;
+            padding: 0px;
+            padding-left: 100px;
+            padding-top: 30Px;
+            padding-right: 100px;
+            background-color: black;
+            color: white;
+            line-height: 24px;
+            cursor: none;
+        }
+        div.bigspace{
+            line-height: 44px;
+        }
+        h1{
+            color: rgb(192, 76, 11);
+        }
+        .center {
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+          width: 50%;
+        }
+        
+    </style>
+</head>
+<body>
+    
+    <header>
+        <h1>Regula Falsi Method</h1>
+    </header>
+
+    <main>
+        <p>
+            The Regula Falsi Method also known as False Position Method, 
+            The test value is modified in accordance with the result using a trial-and-error 
+            methodology that uses false values for the variable.
+        </p>
+        
+        <div>
+            Let's consider the continous function \(f\) in closed interval \([a,b]\) is given with  
+            and  of different signs. 
+        </div>
+
+        <div>
+            Steps to find the root:
+            <ul>
+                <li>Find two points \(a\) and \(b\) such that \(f(a) \times f(b) < 0 \)</li>
+                <li>
+                    Find midpoint of \(a\) and \(b\), say \(c\) 
+                    \[c=\frac{a~f(b)-b~f(a)}{f(b)-f(a)}\]
+                </li>
+                <li>If \(f(c) \times f(a) < 0 \), there exist a root between \(c\) and \(a\). else if \(f(c) \times f(b) < 0 \) there exist a root between \(c\) and \(b\).</li>
+                <li>Repeat above three steps until \(f(c)=0\)</li>
+            </ul>
+
+            <!-- SPerate Equation on new line   -->
+            <!-- \[
+                \int_{a}^{b} x^2 \, dx
+            \] -->
+        </div>
+        
+        <img src="RFM.gif" style="width: 1250px;height: 650px" class="center">
+
+        <div class="bigspace">
+            Example: Consider a function \(f(x)=2 e^x sin(x)-3\)<br>
+            Assume, \(a=-1.5, b=1\)<br>
+            We have \(f(a)=-3.4451,f(b)=1.5747\)<br>
+            \(1^{st}\) Iteration:<br>
+            \(c=\frac{a~f(b)-b~f(a)}{f(b)-f(a)}=\frac{-1.5~f(1)-1~f(-1.5)}{f(1)-f(-1.5)}=0.2158\)<br>
+            \(f(c)=-2.4687\)<br>
+            Now, replace \(a=c\)<br>
+
+            \(2^{nd}\) Iteration:<br>
+            \(c=\frac{a~f(b)-b~f(a)}{f(b)-f(a)}=\frac{0.2158~f(1)-1~f(0.2158)}{f(1)-f(0.2158)}=0.6946\)<br>
+            \(f(c)=-0.4361\)<br>
+            Now, replace \(a=c\)<br>
+
+            \(3^{rd}\) Iteration:<br>
+            \(c=\frac{a~f(b)-b~f(a)}{f(b)-f(a)}=\frac{0.6946~f(1)-1~f(0.6946)}{f(1)-f(0.6946)}=0.7608\)<br>
+            \(f(c)=-0.0489\)<br>
+            Now, replace \(a=c\)<br>
+
+            \(4^{th}\) Iteration:<br>
+            \(c=\frac{a~f(b)-b~f(a)}{f(b)-f(a)}=\frac{0.7608~f(1)-1~f(0.7608)}{f(1)-f(0.7608)}=0.7680\)<br>
+            \(f(c)=-0.0051\)<br>
+            Now, replace \(a=c\)<br>
+
+            \(5^{th}\) Iteration:<br>
+            \(c=\frac{a~f(b)-b~f(a)}{f(b)-f(a)}=\frac{0.7680~f(1)-1~f(0.7680)}{f(1)-f(0.7680)}=0.7688\)<br>
+            \(f(c)=-5.3776e-04\)<br>
+
+            We can stop the iteration here as the \(f(c)\) is closed to zero, so the root of the equation is \(c=0.7688\).<br>
+            <br>
+        </div>
+
+    </main>
+    <link rel="stylesheet" href="../../styles/cursor.css">
+    <div id="cursor" class="Cursor"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="../../scripts/cursor.js"></script>
+  
+</body>
+</html>

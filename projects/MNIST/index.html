@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MNIST App</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Digits Recognition using Deep Learning</h1>
+    </header>
+    
+    <main>
+        <p>The MNIST dataset is a well-known benchmark in the field of machine learning and deep learning, commonly 
+            used for evaluating algorithms designed for image classification tasks. It consists of 70,000 grayscale 
+            images of handwritten digits (0–9), each sized 28x28 pixels. This dataset is split into 60,000 training 
+            images and 10,000 testing images, making it an ideal starting point for experimenting with image-based 
+            neural networks. In this implementation, a deep learning model is constructed using PyTorch, a popular
+             machine learning library. The model architecture, represented by the Model class, is a fully connected 
+             feedforward neural network designed to classify digits in the MNIST dataset.
+        </p>
+        <h2>Model Architecture</h2>
+        <img src="model.png" style="width: 40%;height: auto" class="center">
+
+        <h2>Results</h2>
+        <p>The model's performance improves during training and validation, eventually stabilizing with a training
+             accuracy of approximately 76.02% and a validation accuracy of 84.74%.</p>
+        <img src="results.png" style="width: 40%;height: auto" class="center">
+
+        <h2>Application</h2>
+        <p>Try out the deployed application by hand drawing digit on canvas see if you get correct predicted output.</p>
+
+    </main>
+
+    <div class="centerapp">
+        <div class="container">
+            <h3>Draw on the canvas</h3>
+            <canvas id="canvas"></canvas>
+            <button id="clearButton" class="btn btn-danger mt-3">Clear</button>
+            <h3>Predictions</h3>
+            <canvas id="barChart" width="500" height="250"></canvas>
+        </div>
+    </div>
+    
+    <script type="module" src="script.js"></script>
+    <script src="onnx.js"></script>
+    <script src="model.js"></script>
+    <link rel="stylesheet" href="../../styles/cursor.css">
+    <div id="cursor" class="Cursor"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="../../scripts/cursor.js"></script>
+</body>
+
+</html>

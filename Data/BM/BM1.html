@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bisection Method</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0px;
+            padding: 0px;
+            padding-left: 100px;
+            padding-top: 30Px;
+            padding-right: 100px;
+            background-color: black;
+            color: white;
+            line-height: 24px;
+        }
+        div.bigspace{
+            line-height: 44px;
+        }
+        h1{
+            color: rgb(192, 76, 11);
+        }
+        .center {
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+          width: 50%;
+        }
+        
+    </style>
+</head>
+<body>
+    
+    <header>
+        <h1>Bisection Method</h1>
+    </header>
+
+    <main>
+        <p>The bisection method is used to find the roots of a polynomial equation. 
+            It separates the interval and subdivides the interval in which the root of the equation lies. 
+            The principle behind this method is the intermediate theorem for continuous functions.
+        </p>
+        
+        <div>
+            Let's consider the continous function \(f\) in closed interval \([a,b]\) is given with  
+            and  of different signs. Then by intermediate theorem, there exists a point \(c\) belong to  for which \(f(c)=0\).
+        </div>
+
+        <div>
+            Steps to find the root:
+            <ul>
+                <li>Find two points \(a\) and \(b\) such that \(f(a) \times f(b) < 0 \)</li>
+                <li>Find midpoint of \(a\) and \(b\), say \(c\)</li>
+                <li>If \(f(c) \times f(a) < 0 \), there exist a root between \(c\) and \(a\). else if \(f(c) \times f(b) < 0 \) there exist a root between \(c\) and \(b\).</li>
+                <li>Repeat above three steps until \(f(c)=0\)</li>
+            </ul>
+
+            <!-- SPerate Equation on new line   -->
+            <!-- \[
+                \int_{a}^{b} x^2 \, dx
+            \] -->
+        </div>
+        
+        <img src="BM1.gif" style="width: 1200px;height: 550px" class="center">
+
+        <div class="bigspace">
+            Example: Consider a function \(f(x)=0.5x^3+0.1x^2-2\)<br>
+            Assume, \(a=-2, b=3\)<br>
+            We have \(f(a)=-14.6,f(b)=12.4\)<br>
+            \(1^{st}\) Iteration:<br>
+            \(c=\frac{a+b}{2}=\frac{-2+3}{2}=0.5\)<br>
+            \(f(c)=-1.9125\)<br>
+            Now, replace \(a=c\)<br>
+
+            \(2^{nd}\) Iteration:<br>
+            \(c=\frac{a+b}{2}=\frac{0.5+3}{2}=1.75\)<br>
+            \(f(c)=0.9859\)<br>
+            Now, replace \(b=c\)<br>
+
+            \(3^{rd}\) Iteration:<br>
+            \(c=\frac{a+b}{2}=\frac{0.5+1.75}{2}=1.125\)<br>
+            \(f(c)=-1.1615\)<br>
+            Now, replace \(a=c\)<br>
+
+            \(4^{th}\) Iteration:<br>
+            \(c=\frac{a+b}{2}=\frac{1.125+1.75}{2}=1.4375\)<br>
+            \(f(c)=-0.3081\)<br>
+            Now, replace \(a=c\)<br>
+
+            \(5^{th}\) Iteration:<br>
+            \(c=\frac{a+b}{2}=\frac{1.4375+1.75}{2}=1.5938\)<br>
+            \(f(c)=0.2781\)<br>
+            Now, replace \(b=c\)<br>
+
+            \(6^{th}\) Iteration:<br>
+            \(c=\frac{a+b}{2}=\frac{1.4375+1.5938}{2}=1.5156\)<br>
+            \(f(c)=-0.0294\)<br>
+            Now, replace \(a=c\)<br>
+
+            \(7^{th}\) Iteration:<br>
+            \(c=\frac{a+b}{2}=\frac{1.5156+1.5938}{2}=1.5547\)<br>
+            \(f(c)=0.1206\)<br>
+            Now, replace \(b=c\)<br>
+
+            \(8^{th}\) Iteration:<br>
+            \(c=\frac{a+b}{2}=\frac{1.5156+1.5547}{2}=1.5352\)<br>
+            \(f(c)=0.0446\)<br>
+            Now, replace \(b=c\)<br>
+
+            \(9^{th}\) Iteration:<br>
+            \(c=\frac{a+b}{2}=\frac{1.5156+1.5352}{2}=1.5254\)<br>
+            \(f(c)=0.0074\)<br>
+
+            We can stop the iteration here as the \(f(c)\) is closed to zero, so the root of the equation is \(c=1.5254\).<br>
+            <br>
+        </div>
+
+    </main>
+  
+</body>
+</html>
