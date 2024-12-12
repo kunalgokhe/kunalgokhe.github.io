@@ -1,0 +1,92 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0px;
+  padding: 0px;
+  padding-left: 100px;
+  padding-top: 30Px;
+  padding-right: 100px;
+  background-color: black;
+  color: white;
+  line-height: 24px;
+  cursor: none;
+  text-align: justify;
+}
+div.bigspace{
+  line-height: 44px;
+}
+h1{
+  color: rgb(192, 76, 11);
+}
+h2{
+  color: rgb(192, 76, 11);
+}
+h3{
+  color: rgb(192, 76, 11);
+}
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+.input_video {
+  display: none;
+}
+.output_canvas {
+  width: 480px;
+  height: 320px;
+  background-color: black;
+  cursor: none;
+}
+.media-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 480px;
+  margin: auto;
+  margin-top: 20px;
+  border: 2px solid rgb(192, 76, 11);
+  border-radius: 5px;
+  overflow: hidden;
+  cursor: none;
+}
+.prediction-box {
+  width: 70px;
+  height: 70px;
+  margin: auto;
+  margin-top: 20px; 
+  margin-bottom: 20px; 
+  background-color: black;
+  border: 2px solid rgb(192, 76, 11); 
+  border-radius: 5px; 
+  position: relative;
+  text-align: center;
+  color: rgb(192, 76, 11);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center; 
+  font-size: 48px;
+  font-weight: bold;
+}
+#startButton {
+  margin-top: 14px;
+  margin: auto;
+  font-family: Arial, Helvetica, sans-serif;
+  display: block;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px 15px;
+  font-size: 16px;
+  background-color: rgb(192, 76, 11);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  cursor: none;
+}
+#startButton:hover{
+  background-color: #fff;
+  color: rgb(192, 76, 11);
+  cursor: none;
+}

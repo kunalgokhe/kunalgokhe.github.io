@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Language Recognition App</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Hand Sign Language Recognition</h1>
+  </header>
+  <main>
+    <p>Hand sign language recognition is a crucial technology designed to bridge the communication gap between
+       sign language users and non-signers. This system leverages machine learning to identify hand gestures 
+       and translate them into corresponding textual or verbal outputs, thereby fostering inclusivity and accessibility.
+       The recognition pipeline is built on a robust architecture that processes hand keypoints extracted from video 
+       frames. These keypoints, represented as 2D coordinates, form the feature set for a neural network model that 
+       classifies gestures into 24 categories (e.g., the alphabet excluding J and Z, which involve motion).
+    </p>
+    <h2>Model Architecture</h2>
+    <p>The model consists of fully connected layers designed to process the 42-dimensional input 
+      (representing hand keypoints). The architecture employs dropout regularization to prevent overfitting
+       and utilizes the ReLU activation function for non-linearity. A softmax layer is used at the output to provide 
+       class probabilities, enabling accurate gesture recognition. This system can be integrated into various applications,
+        including educational tools, accessibility services, and real-time communication systems.
+    </p>
+    <img src="model.png" style="width: 40%;height: auto" class="center">
+    <h2>Hand Signs</h2>
+    <img src="handsign.png" style="width: 40%;height: auto" class="center">
+    <h2>Results</h2>
+    <p>The plot showing the accuracy (blue) and loss (red) across the epochs. The left y-axis represents accuracy, 
+      and the right y-axis represents loss, providing a clear visualization of the model's training performance over time.
+    </p>
+    <img src="results.png" style="width: 40%;height: auto" class="center">
+    <h2>Application</h2>
+    <p>Try out the deployed Hand Sign Language Recognition, Click 'Start Camera' to begin and see it in action!</p>
+
+    <div class="media-container">
+      <video class="input_video" autoplay></video>
+      <canvas class="output_canvas"></canvas>
+    </div>
+    <div id="prediction" class="prediction-box"> </div>
+    <button id="startButton" class="btn btn-danger mt-3">Start Camera</button>
+
+    <p>I hope you enjoy using the application! It has been designed to provide an intuitive and seamless experience 
+      for recognizing hand signs, and I believe it will be both fun and educational. Whether you're learning sign language 
+      or testing your skills, the app aims to be a helpful and engaging tool. Feel free to explore its features, and let me know 
+      if you have any feedback or questions. Enjoy using it!
+    </p>
+  </main>
+  <script src="hands.js"></script>
+  <script src="drawing_utils.js"></script>
+  <script src="camera_utils.js"></script>
+  <script type="module" src="script.js"></script>
+  <link rel="stylesheet" href="../../styles/cursor.css">
+  <div id="cursor" class="Cursor"></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="../../scripts/cursor.js"></script>
+</body>
+</html>
