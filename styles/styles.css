@@ -11,6 +11,10 @@
     color: white;
     background-color: black;
     scroll-behavior: smooth;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
   
   /* Navigation styling */
@@ -230,7 +234,7 @@ nav::after {
 #section1 h2 {
   font-family: 'Roboto', sans-serif;
   font-size: 1.8em;
-  color: rgb(192, 76, 11); /* Soft red */
+  color: rgb(192, 76, 11);
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
   margin: 0;
   letter-spacing: 5px;
@@ -238,4 +242,16 @@ nav::after {
   line-height: 1.2;
   margin-top: 30px;
   margin-bottom: 0px;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.footer {
+  transition: transform 0.3s ease;
+}
+.footer:hover {
+  transform: scale(1);
 }

@@ -31,7 +31,7 @@
 
 .progress-label {
   position: fixed;
-  top: -30px;
+  top: -6%;
   left: 50%;
   transform: translateX(-50%);
   color: white;
