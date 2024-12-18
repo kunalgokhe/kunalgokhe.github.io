@@ -255,3 +255,40 @@ nav::after {
 .footer:hover {
   transform: scale(1);
 }
+
+.svgcontainer{
+  display: flex;
+  align-items: top;
+  justify-content: center;
+  gap: 20px;
+}
+.skillcontainer{
+  display: flex;
+  align-items: top;
+  justify-content: center;
+  gap: 80px;
+}
+
+.msgcontainer {
+  background: black;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 30px;
+}
+
+.msgcontainer textarea {
+  cursor: text;
+  font-family: DM Sans, sans-serif, ProximaNovaRegular !important;
+  width: 400px;
+  height: 200px;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  resize: none;
+  font-size: 14px;
+  margin-bottom: -20px;
+}
