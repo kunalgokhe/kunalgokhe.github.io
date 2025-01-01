@@ -8,6 +8,29 @@
   <link rel="stylesheet" href="styles/styles.css">
   <link rel="stylesheet" href="styles/ani.css">
   <link rel="stylesheet" href="styles/cursor.css">
+  <script>
+    function setZoomBasedOnScreen() {
+      const screenWidth = window.innerWidth;
+      let zoomLevel = 1;
+      if (screenWidth > 1440) {
+        zoomLevel = 1;
+      } else if (screenWidth > 1024) {
+        zoomLevel = 0.9;
+      } else {
+        zoomLevel = 0.8;
+      }
+
+      // Apply zoom dynamically
+      document.body.style.transform = `scale(${zoomLevel})`;
+      document.body.style.transformOrigin = "0 0"; // Prevent clipping
+    }
+
+    // Initial setup
+    setZoomBasedOnScreen();
+
+    // Update on window resize
+    window.addEventListener("resize", setZoomBasedOnScreen);
+  </script>
 </head>
 
 <body>
