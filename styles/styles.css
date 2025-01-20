@@ -179,6 +179,8 @@ nav::after {
   float: left;
   width: 21%;
   padding: 0 10px;
+  display: flex;
+  justify-content: center;
 }
 
 /* Remove extra left and right margins, due to padding in columns */
