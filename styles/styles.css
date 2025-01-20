@@ -130,7 +130,7 @@ nav::after {
   border-bottom-color: rgba(255, 255, 255, 0);
   box-shadow: 0 20px 30px rgba(0, 0, 0, 0);
   padding: 15px;
-  left: 106px;
+/*   left: 106px; */
   position: relative;
   display: flex;
   justify-content: center;
@@ -179,10 +179,16 @@ nav::after {
   float: left;
   width: 21%;
   padding: 0 10px;
+  display: flex;
+  justify-content: center;
 }
 
 /* Remove extra left and right margins, due to padding in columns */
-.row {margin: 0 -5px;}
+.row {
+    margin: 0 -5px;
+    display: flex;
+  justify-content: center;
+}
 
 /* Clear floats after the columns */
 .row:after {
