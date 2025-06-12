@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI/ML Lifecycle Management using Agentic AI</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0px;
+            padding: 0px;
+            padding-left: 100px;
+            padding-top: 30px;
+            padding-right: 100px;
+            background-color: black;
+            color: white;
+            line-height: 24px;
+            cursor: none;
+            text-align: justify;
+        }
+        div.bigspace{
+            line-height: 44px;
+        }
+        h1{
+            color: rgb(192, 76, 11);
+            text-align: left;
+        }
+        h2{
+            color: rgb(192, 76, 11);
+            border-bottom: 1px solid rgb(192, 76, 11);
+            padding-bottom: 10px;
+        }
+        h3{
+            color: rgb(192, 76, 11);
+        }
+        .center {
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+          width: 50%;
+        }
+        .footer-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            cursor: none;
+        }
+        .footer {
+            transition: transform 0.3s ease;
+            cursor: none;
+        }
+        .footer:hover {
+            transform: scale(1);
+            cursor: none;
+        }
+        .img-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .img-container img {
+            width: 45%;
+            height: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #444;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #333;
+        }
+        .certificate {
+            text-align: center;
+            font-style: italic;
+            margin: 30px 0;
+        }
+        .declaration {
+            margin: 30px 0;
+        }
+        .acknowledgement {
+            font-style: italic;
+        }
+        .page-break {
+            page-break-before: always;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    
+    <header">
+      <h1>AI/ML Lifecycle Management using Agentic AI</h1>
+    </header>
+
+    <h2>ABSTRACT</h2>
+    <p>In modern AI systems, the deployment of machine learning models into production environments poses serious difficulties in terms of performance maintenance, transparency, and facilitating quick change adaptability. While traditional MLOps pipelines automate deployment and monitoring, they frequently lack proactive diagnostics, contextual awareness, and traceability throughout the whole model lifecycle. This project suggests a new framework for managing the AI lifecycle that is driven by a semantic knowledge manager and agentic AI. The system makes use of modular agents, such as a Drift and Anomaly Detection Agent, Suggestive Action Agent, Report Generation Agent, and Chatbot Agent, which work together to detect data and concept drift, monitor model health, and recommend or condense remedial activities. All lifecycle artifacts, such as validation tests, alarms, performance measurements, upstream dependencies, and SHAP-based explainability results, are stored in a centralized knowledge graph that facilitates semantic reasoning and full traceability.</p>
+
+    <p>Model stability is regularly evaluated by the framework using statistical validation methods (e.g., Wasserstein Distance, KS Test) and supporting supervised machine learning models. A conversational interface makes it easier for stakeholders and data scientists to get comprehensive reports that are automatically generated.</p>
+
+    <p>Results from experiments show how well the system works to spot performance issues, decipher underlying causes, and direct practical fixes--all while maintaining auditability and compliance. The framework for scalable, explicable, and self-governing AI lifecycle governance is established by this work.</p>
+
+    <div class="page-break"></div>
+    <h2>1. INTRODUCTION</h2>
+    <p>Machine Learning (ML) models are not autonomous artifacts--they are part of a bigger system that must be constructed, monitored, maintained, and continuously improved. This procedure is referred to as ML Model Lifecycle Management as shown in Figure 1.1, and it spans all steps from data ingestion to model retirement. As ML systems are implemented in dynamic, real-world situations, their performance can decline over time due to data drift, concept drift, or changes in user behaviour. Hence, controlling the entire lifetime is critical to assure the dependability, relevance, and fairness of deployed models. Traditional ML lifecycle management is frequently manual, scattered across tools and teams, and lacks real-time adaptation. This makes it inefficient, error-prone, and difficult to scale in fast-paced or mission-critical applications. In response, the discipline has witnessed a growing interest in MLOps (Machine Learning Operations), which offers DevOps-like methods for ML operations. However, even MLOps platforms require continual human oversight and orchestration.</p>
+
+    <img src="mllcm.png" alt="AI/ML Lifecyscle Management" class="center">
+    <p class="center"><em>Figure 1.1: AI/ML Lifecycle Management</em></p>
+
+    <h3>1.1 Background and Motivation</h3>
+    <p>From experimental prototypes to production-grade solutions, artificial intelligence (AI) systems have quickly advanced across a variety of industries, including manufacturing, healthcare, finance, and energy. Machine learning (ML) models, which are at the core of these systems, rely on robust lifecycle management--the methodical handling of models from inception to retirement--as well as algorithmic sophistication to be effective. Data collection and preprocessing, model selection and training, evaluation, deployment, monitoring, and retraining are the usual phases of the AI/ML model lifecycle. This lifetime is becoming more continuous and iterative as AI systems are used in more dynamic, real-world settings. Continuous updates and strict control are required due to factors like data drift, model deterioration, compliance requirements, and shifting user behavior. Conventional lifecycle management techniques are frequently labor-intensive, disjointed, and manual. By fusing ML workflows with DevOps concepts, MLOps has evolved to simplify some of these issues, but it still mostly relies on human specialists to make choices, manage exceptions, and modify processes in response to changing system conditions. At the same time, new avenues for intelligent orchestration have been made possible by the development of agentic AI, which refers to autonomous, goal-driven software entities that are able to perceive their surroundings, make decisions, and carry out actions. These agents are increasingly capable of handling complex tasks, responding to feedback, and cooperating across domains by utilizing reasoning frameworks and large language models (LLMs). One viable route to self-managing AI systems is the integration of such agents into the AI lifecycle. As AI usage grows, a number of lifecycle management pain points emerge:</p>
+
+    <ul>
+        <li><strong>Expandability Barriers:</strong> The scalability of AI systems across teams and projects is restricted by manual processes for deployment, monitoring, and adjustment.</li>
+        <li><strong>Delayed Responsiveness:</strong> Degradation or drift may go unnoticed for extended periods of time, which could result in loss of performance or skewed output forecasts.</li>
+        <li><strong>Lack of Interoperability:</strong> Tools used throughout the lifecycle frequently don't integrate well, which leads to ineffective transitions and broken processes.</li>
+        <li><strong>High Human Dependency:</strong> Compliance checks, retraining, and re-deployment still need human-in-the-loop supervision.</li>
+    </ul>
+
+    <p>These challenges inspired the exploration of Agentic AI as a foundation for transforming AI lifecycle management from a reactive, human-led process to a proactive, self-adaptive system. The following primary goals serve as the motivation for this thesis:</p>
+
+    <ul>
+        <li>To use collaborative software agents that can act intelligently with little supervision in order to automate and streamline the phases of the AI lifecycle.</li>
+        <li>To increase system resilience and responsiveness by giving agents the ability to recognize and react to problems such as operational abnormalities, data drift, and model underperformance.</li>
+        <li>To provide a scalable, modular architecture that offers reusable parts for the creation of cross-domain AI and allows agents to function alone or cooperatively.</li>
+        <li>Will use real-world case studies in predictive maintenance and ESG report automation to illustrate the viability of an agentic methodology.</li>
+    </ul>
+
+    <p>In order to bridge the gap between automation and autonomy in AI model lifecycle management, this study combines the intelligence of agent-based systems with the structure of MLOps.</p>
+
+    <h3>1.2 Problem Statement</h3>
+    <p>The majority of enterprises still have major difficulties with post-deployment monitoring and maintenance of machine learning models, even with notable improvements in MLOps and model deployment infrastructure. A model functions in dynamic situations where user behavior, system limitations, and underlying data distributions might alter over time once it is put into production. These modifications frequently result in data drift, inconsistent predictions, latency problems, or poor model performance, all of which can harm user confidence and business results. Conventional monitoring systems lack contextual awareness and flexibility and are either rule-based or metric-specific (e.g., tracking accuracy or response time). Furthermore, they don't offer useful insights; instead, they notify data scientists of a problem but let human specialists determine the underlying cause and the best course of action. Delays, inefficiencies, and higher operating expenses result from this. Ensuring a machine learning model's long-term performance, dependability, and fairness becomes crucial after it is put into production. The majority of real-world machine learning systems, however, function in non-stationary contexts, where variations in user behaviour, system loads, and data distributions can eventually lead to a decline in performance. The goal of this project is to create a lifecycle management system based on agentic AI that can recognize problems in machine learning models on its own, including:</p>
+
+    <ul>
+        <li><strong>Model Performance:</strong> Model performance refers to the ability of a machine learning model to generate accurate and reliable predictions when evaluated on unseen data. Performance is typically quantified using evaluation metrics that vary depending on the type of task--such as accuracy, precision, recall, F1-score, ROC AUC for classification tasks, or RMSE, MAE, and R² for regression tasks.</li>
+        <li><strong>Data Drift:</strong> Changes in feature distributions or target concept that affect model predictions.</li>
+        <li><strong>Concept Drift:</strong> Concept drift refers to the phenomenon where the statistical properties of the target variable, which a model is trying to predict, change over time in unforeseen ways. This presents a critical challenge in machine learning systems, especially those deployed in dynamic environments where data generation processes are non-stationary.</li>
+        <li><strong>Explainability Test:</strong> SHAP (SHapley Additive exPlanations) is a powerful framework for interpreting the output of machine learning models. It is based on cooperative game theory, specifically the Shapley values, which provide a theoretically sound method to quantify the contribution of each feature to a model's prediction.</li>
+        <li><strong>Latency Spikes:</strong> Increased response time in serving predictions due to infrastructure or model complexity issues.</li>
+        <li><strong>Prediction Inconsistency Issues:</strong> Unstable predictions for similar or identical inputs, signaling model instability.</li>
+    </ul>
+
+    <img src="validationtest.drawio.png" alt="Validation Tests" class="center">
+    <p class="center"><em>Figure 1.2: Validation Tests</em></p>
+
+    <p>The solution makes use of intelligent agents that keep an eye on deployed models, identify anomalies, and--above all--produce actionable recommendations that data scientists can comprehend and implement. These recommendations are supported by domain expertise, statistical analysis, and past model behaviour.</p>
+
+    <h3>1.3 Objective</h3>
+    <p>Designing and implementing an agentic AI-based system to manage the lifecycle of machine learning models in production is the main goal of this thesis is shown below Figure 3. It focuses on identifying and resolving model health issues like latency spikes, performance degradation, data and concept drift, and inconsistent predictions.</p>
+
+    <p><strong>To identify problems with ML model performance</strong></p>
+    <p>Use real-time evaluation metrics (such as accuracy, precision, recall, and AUC) to spot performance declines and automatically compare them to predetermined standards from the training and validation stages.</p>
+
+    <img src="objective.drawio(1).png" alt="Main Objectives" class="center">
+    <p class="center"><em>Figure 1.3: Main Objectives</em></p>
+
+    <h3>1.4 Scope and Limitation</h3>
+    <p>The post-deployment stage of the machine learning lifecycle, when preserving model performance, dependability, and interpretability is crucial, is the main emphasis of this thesis. The scope consists of:</p>
+
+    <p><strong>Using Agentic AI to Track Lifecycles</strong></p>
+    <p>Creation of task-specific, autonomous agents that monitor model health metrics and offer useful information without continual human involvement.</p>
+
+    <p><strong>Model Health Aspects Addressed</strong></p>
+    <ul>
+        <li><strong>Performance parameters:</strong> Tracking real-time evaluation parameters such F1-score, recall, accuracy, and precision.</li>
+        <li><strong>Data and Concept Drift Detection:</strong> The process of identifying and categorizing changes in data and model behavior using statistical methods (such as PSI, KS-test, and residual drift).</li>
+        <li><strong>System Usage Monitoring:</strong> Recording and examining request volumes, hardware usage, and inference latency.</li>
+        <li><strong>Explainability and Stability Analysis:</strong> Using SHAP/LIME to identify changes in the logic of the model and highlight predictions that don't add up.</li>
+    </ul>
+
+    <p><strong>Recommendations for Action</strong></p>
+    <p>In addition to identifying issues, the system makes recommendations for actions such as retraining, model rollback, feature recalibration, or performance tweaking that are both comprehensible and pertinent to the domain.</p>
+
+    <p><strong>Design with the User in Mind</strong></p>
+    <p>Intended for ML developers and data scientists, emphasizing practical results that fit seamlessly into MLOps processes.</p>
+
+    <p><strong>Applications</strong></p>
+    <p>Real-world datasets and applications, such as fraud detection, ESG reporting, and predictive maintenance, are used to illustrate this.</p>
+
+    <ol>
+        <li><strong>Predictive Maintenance</strong>
+        <p>Predict potential machine failures by analyzing sensor data such as vibration, temperature, and pressure. ML models forecast breakdowns to minimize downtime. Lifecycle management ensures models remain accurate as machinery ages and new data arrives.</p></li>
+        
+        <li><strong>Quality Control and Defect Detection</strong>
+        <p>Automate visual inspection or sensor-based detection to classify products as defective or non-defective. Continuous monitoring helps detect model performance degradation caused by changes in production processes or raw materials.</p></li>
+        
+        <li><strong>Process Optimization</strong>
+        <p>Optimize manufacturing parameters (e.g., temperature, pressure, speed) to maximize yield and efficiency. Lifecycle management tracks model recommendations and ensures adaptation to process changes over time.</p></li>
+        
+        <li><strong>Supply Chain and Inventory Management</strong>
+        <p>Forecast demand and optimize inventory levels by analyzing historical and real-time data. ML models adjust to market variations and seasonality. Lifecycle management monitors data freshness and model accuracy to prevent stock issues.</p></li>
+    </ol>
+
+    <p><strong>Limitations</strong></p>
+    <p>Despite the system's capabilities, certain boundaries and constraints are acknowledged:</p>
+
+    <ol>
+        <li><strong>No Retraining of the Model Automatically:</strong> The system does not automatically retrain or redeploy models to uphold accountability and stop unexpected behavior, even while suggesting actions are offered.</li>
+        <li><strong>Restricted to Learning Models Under Supervision:</strong> Regression and classification supervised machine learning models are now supported by the framework. It is outside the purview to extend to unsupervised systems or reinforcement learning.</li>
+        <li><strong>Explainability Reliant on Outside Libraries:</strong> They use interpretability tools like SHAP and LIME, which have limits for deep or complicated ensemble models and their own processing overhead.</li>
+        <li><strong>Coverage of Partial Drift:</strong> Although statistical drift is detected by the framework, latent idea drift might not be fully captured if label feedback is delayed or missing.</li>
+        <li><strong>Assumptions for Infrastructure and Tooling:</strong> Deployment logs, inference outputs, and system utilization data are assumed to be accessible by the suggested system. Additional preparation may be necessary for organizations without MLOps tooling.</li>
+        <li><strong>Limitations on Scalability in Early Prototype:</strong> If the prototype isn't further tuned, it can have trouble scaling in high-frequency inference settings or multi-model contexts.</li>
+    </ol>
+
+    <div class="page-break"></div>
+
+    <h2>2. LITERATURE REVIEW</h2>
+    <h3>2.1 Overview of ML Techniques</h3>
+    <p>The term Machine Learning Operations (MLOps) describes a collection of procedures and tools designed to automate and oversee the lifespan of machine learning (ML) models in operational settings. Inspired by classic DevOps, it is specifically designed to tackle the special difficulties of machine learning (ML) systems, which integrate models, data, and code.</p>
+
+    <p><strong>Key components of MLOps</strong></p>
+    <ol>
+        <li><strong>Data Management:</strong> From data collection, preprocessing, and versioning to metadata maintenance, MLOps starts with strong data management. Among the methods are:
+            <ul>
+                <li>Data lineage tracking</li>
+                <li>Schema validation and monitoring</li>
+                <li>Real-time data drift detection</li>
+            </ul>
+        </li>
+        <li><strong>Model Development and Training:</strong> Ensures reproducibility and efficiency using:
+            <ul>
+                <li>Experiment tracking frameworks (e.g., MLflow, TFX)</li>
+                <li>Hyperparameter optimization tools (e.g., Optuna, Ray Tune)</li>
+                <li>Containerization (e.g., Docker)</li>
+            </ul>
+        </li>
+        <li><strong>Model Versioning and Registry:</strong> Tools such as <strong>Weights & Biases</strong>, <strong>DVC</strong> (Data Version Control), and <strong>MLflow Model Registry</strong> play a crucial role in managing model artifacts and ensuring reproducibility of machine learning experiments.</li>
+        <li><strong>Validation and Testing:</strong>
+            <ul>
+                <li>Unit and pipeline testing</li>
+                <li>Continuous statistical validation (e.g., KS-Test, Z-Test)</li>
+                <li>Shadow deployment and canary testing</li>
+            </ul>
+        </li>
+        <li><strong>Deployment and Serving:</strong>
+            <ul>
+                <li>Model serving via TensorFlow Serving, TorchServe, or KFServing</li>
+                <li>Deployment strategies: rolling updates, blue-green deployments, A/B testing</li>
+            </ul>
+        </li>
+        <li><strong>Monitoring and Observability</strong>
+            <ul>
+                <li>Monitoring of performance metrics (accuracy, latency)</li>
+                <li>Data and concept drift detection (e.g., JS Divergence, Wasserstein Distance)</li>
+                <li>Automated alerting mechanisms</li>
+            </ul>
+        </li>
+        <li><strong>Automation and Orchestration:</strong>
+            <ul>
+                <li>Pipeline orchestration tools (e.g., Kubeflow, Apache Airflow, Dagster)</li>
+                <li>CI/CD workflows with Jenkins, GitHub Actions, GitLab CI</li>
+            </ul>
+        </li>
+        <li><strong>Governance and Compliance:</strong>
+            <ul>
+                <li>Model audit trails</li>
+                <li>Compliance support (e.g., GDPR, HIPAA)</li>
+                <li>Explainability and model documentation</li>
+            </ul>
+        </li>
+    </ol>
+
+    <p><strong>Modern Enhancements in MLOps</strong></p>
+    <ul>
+        <li><strong>Agentic AI:</strong> Intelligent agents automate lifecycle decisions like retraining or rollback.</li>
+        <li><strong>Knowledge Manager Integration:</strong> Semantic storage of model state, test results, and recommendations.</li>
+        <li><strong>Multi-model Management:</strong> Simultaneous management of thousands of models with lineage and health checks.</li>
+    </ul>
+
+    <p><strong>Comparison of AI/ML Lifecycle Management: With vs Without Agentic AI</strong></p>
+    <table>
+        <tr>
+            <th>Aspect</th>
+            <th>Without Agentic AI</th>
+            <th>With Agentic AI</th>
+        </tr>
+        <tr>
+            <td>Orchestration</td>
+            <td>Manual or script-based orchestration; limited scalability</td>
+            <td>Autonomous agents coordinate tasks dynamically</td>
+        </tr>
+        <tr>
+            <td>Monitoring</td>
+            <td>Periodic monitoring via dashboards; often delayed detection</td>
+            <td>Continuous and proactive monitoring by Drift/Anomaly Agents</td>
+        </tr>
+        <tr>
+            <td>Actionability</td>
+            <td>Relies on manual intervention; slower response to issues</td>
+            <td>Suggestive Action Agent recommends retraining, tuning, or rollback</td>
+        </tr>
+        <tr>
+            <td>Explainability</td>
+            <td>Basic static reporting; limited stakeholder interaction</td>
+            <td>Chatbot Agent offers conversational explanations and summaries</td>
+        </tr>
+        <tr>
+            <td>Traceability</td>
+            <td>Disconnected logs, hard to reconstruct root cause</td>
+            <td>Knowledge Manager maintains linked records across components</td>
+        </tr>
+        <tr>
+            <td>Scalability</td>
+            <td>Challenging with growing models and data</td>
+            <td>Scales via modular and parallel agent-based architecture</td>
+        </tr>
+        <tr>
+            <td>Automation Level</td>
+            <td>Low to moderate; depends on pre-defined rules</td>
+            <td>High; agents operate autonomously using semantic reasoning</td>
+        </tr>
+    </table>
+
+    <h3>2.2 Related Work</h3>
+    <h4>2.2.1 Machine Learning Models Monitoring in MLOps Context: Metrics and Tools (2023)</h4>
+    <p>In their article "Machine Learning Models Monitoring in MLOps Context: Metrics and Tools" published in the International Journal of Interactive Mobile Technologies, Bodor, Hnida, and Daoudi (2023) provide a thorough analysis of machine learning model monitoring within the MLOps paradigm. Despite notable advancements in artificial intelligence, the rate of industrialization and production deployment of machine learning projects is still alarmingly low. This study fills a major gap in machine learning deployment procedures. By combining continuous integration (CI), continuous deployment (CD), and introducing ML-specific concepts like continuous training (CT) and continuous monitoring (CM), the authors situate their work within the larger MLOps paradigm, which applies DevOps principles to machine learning model management.</p>
+
+    <p>The study was prompted by the realization that many machine learning initiatives have insufficient monitoring methods, which compromises the sustainability, dependability, and quality of models used in real-world settings. The study reiterates that ML model development doesn't stop with deployment but necessitates ongoing monitoring to ensure long-term reliability and effectiveness, building on seminal work highlighting "Hidden Technical Debt in Machine Learning Systems" from 2015, which first articulated the challenges of continuous machine learning application usage.</p>
+
+    <p><strong>Lifecycle Monitoring and Automation</strong></p>
+    <p>In order to construct a comprehensive model that includes the phases of data extraction, validation, preparation, model training, assessment, deployment, and integration, the paper offers a complex framework for viewing ML model monitoring as a transversal phase across the MLOps lifecycle. An iceberg model is used to illustrate the various levels of their monitoring framework. Visible components only make up a small portion of the intricate monitoring requirements; hidden features include data quality, model performance, and ecosystem health metrics that are critical to system dependability. The authors identify key monitoring stages across data preparation, modeling/deployment, and production environment phases, and they classify monitoring metrics into gauge metrics (recording system values), delta metrics (calculating variances between measurements), and cumulative metrics (tracking counter evolution over time).</p>
+
+    <p>By integrating AutoML, the automation component is addressed by lowering the technical complexity of algorithm selection and hyperparameter optimization, supporting automated retraining procedures, and providing warning features that inform administrators of threshold deviations or serious issues. With a focus on automated metadata collection and versioning capabilities across data, code, hyperparameters, pipelines, and monitoring results to support the iterative nature of MLOps, the monitoring system includes data quality profiling, model performance evaluation, usage efficiency metrics, and business KPIs.</p>
+
+    <p><strong>Comparative Studies and Limitations</strong></p>
+    <p>Using a radar chart methodology to assess cost, integration capabilities, data drift monitoring, model comparison features, and automatic alerting systems, the study offers a thorough comparative analysis of ML monitoring tools, differentiating between open-source and proprietary solutions. Their analysis, which includes well-known MLOps tools like MLflow, Kubeflow, DVC, Great Expectations, and Seldon Alibi-Detect, shows that proprietary tools typically offer broader feature coverage than open-source alternatives. They also suggest that organizations can attain comprehensive coverage by strategically combining multiple open-source tools rather than depending solely on one proprietary solution.</p>
+
+    <p>The study does, however, recognize a number of shortcomings, such as the need for additional validation through full end-to-end architecture implementation in practical settings and the need for more sophisticated AI-based monitoring methods and standardized protocols that are applicable to different industries. The lack of empirical performance evaluations of suggested tool combinations in production environments, the paper's primary focus on technical monitoring aspects without a thorough examination of organizational factors influencing MLOps adoption, and the authors' acknowledgement that their work is a foundational framework rather than a fully validated solution--noting that the MLOps landscape is changing quickly and that updates are necessary to stay relevant--are some of the paper's limitations.</p>
+
+    <!-- Continue with other sections following the same pattern -->
+
+    <div class="page-break"></div>
+
+    <h2>3. METHODOLOGY</h2>
+    <p>The design and implementation of an agentic AI-based system that independently monitors, validates, and manages deployed machine learning models across many model health metrics is the main focus of the technique used in this study. This entails identifying problems including latency/resource bottlenecks, explainability inconsistencies, data or idea drift, and performance degradation and offering insightful, understandable recommendations for remedial action.</p>
+
+    <h3>3.1 Validation Test</h3>
+    <h4>3.1.1 Model Performance</h4>
+    <p>If metrics such as RMSE or MAE increase over time, it may indicate model drift or data inconsistency. R² reduction could suggest model underfitting or feature shifts as given in above Table 3.1.</p>
+
+    <p><strong>Model Performance (Classification)</strong></p>
+    <table>
+        <tr>
+            <th>Metric</th>
+            <th>Formula / Description</th>
+            <th>Interpretation</th>
+        </tr>
+        <tr>
+            <td>Mean Absolute Error (MAE)</td>
+            <td>MAE = \(\frac{1}{n}\sum|y_i-\hat{y}_i|\)</td>
+            <td>Average absolute difference between predicted and actual values.</td>
+        </tr>
+        <tr>
+            <td>Mean Squared Error (MSE)</td>
+            <td>MSE = \(\frac{1}{n}\sum(y_i-\hat{y}_i)^2\)</td>
+            <td>Gives higher weight to larger errors due to squaring.</td>
+        </tr>
+        <tr>
+            <td>Root Mean Squared Error (RMSE)</td>
+            <td>RMSE = \(\sqrt{\text{MSE}}\)</td>
+            <td>Has same unit as target variable. Useful for interpretability.</td>
+        </tr>
+        <tr>
+            <td>R-squared (R²)</td>
+            <td>R² = \(1-\frac{SS_{\text{res}}}{SS_{\text{tot}}}\)</td>
+            <td>Explains proportion of variance in target predicted by model.</td>
+        </tr>
+        <tr>
+            <td>Adjusted R-squared</td>
+            <td>Penalized R² for number of predictors used</td>
+            <td>More accurate when comparing models with different features.</td>
+        </tr>
+        <tr>
+            <td>Mean Absolute Percentage Error (MAPE)</td>
+            <td>MAPE = \(\frac{100\%}{n}\sum\left|\frac{y_i-\hat{y}_i}{y_i}\right|\)</td>
+            <td>Shows error as percentage; can be misleading when \(y_i \approx 0\).</td>
+        </tr>
+    </table>
+
+    <p><strong>Interpretation in Lifecycle:</strong></p>
+    <ul>
+        <li>Drop in precision or recall: May indicate class imbalance drift</li>
+        <li>Increase in log-loss: The model is overconfident or uncertain</li>
+        <li>ROC AUC drop: Indicates loss in separability between classes</li>
+    </ul>
+
+    <h4>3.1.2 Data Drift</h4>
+    <p>Data Drift refers to a change in the distribution of data over time as shown in below Figure 3.1, especially the input features a machine learning model receives in production. It's a critical issue that can silently degrade the performance of even the most accurate models if not monitored and addressed.</p>
+
+    <img src="datadrift.png" alt="Drifted Distribution" class="center">
+    <p class="center"><em>Figure 3.1: Drifted Distribution</em></p>
+
+    <p><strong>Chi-Square Test</strong></p>
+    <p>The Chi-Square test compares the observed frequencies in the live (production) data with the expected frequencies derived from the training (reference) data. A significant difference between these frequencies indicates a potential drift in the feature distribution.</p>
+
+    <p>Mathematical formulation:</p>
+    <p>For a feature discretized into k bins</p>
+    <p>\(\chi^2 = \sum_{i=1}^k \frac{(O_i - E_i)^2}{E_i}\)</p>
+    <p>whereas,</p>
+    <p>\(O_i\) : Observed frequency in bin \(i\) (from production data)</p>
+    <p>\(E_i\) : Observed frequency in bin \(i\) (from training data)</p>
+
+    <p>Hypotheses:</p>
+    <ul>
+        <li>Null Hypothesis \(H_0\): The distributions are the same (no drift).</li>
+        <li>Alternative Hypothesis \(H_1\): The distributions differ (drift present).</li>
+    </ul>
+
+    <p>Determine p-value:</p>
+    <p>\(p = 1 - \text{CDF}_{\chi^2}(\chi^2, \text{df} = k-1)\)</p>
+
+    <p><strong>Kolmogorov-Smirnov Test</strong></p>
+    <p>The KS test is used to compare the distributions of a continuous feature in the training (reference) and production (observed) datasets. It is particularly useful for identifying data drift in numeric (non-categorical) variables. <strong>The KS test</strong> measures the <strong>maximum difference</strong> between the <strong>empirical cumulative distribution functions (ECDFs)</strong> of the two datasets.</p>
+
+    <p>\(D = \sup_x |F_1(x) - F_2(x)|\)</p>
+    <p>whereas,</p>
+    <ul>
+        <li>\(F_1(x)\): ECDF of the training feature</li>
+        <li>\(F_2(x)\): ECDF of the production feature</li>
+        <li>\(D\): KS statistic (maximum vertical distance between ECDFs)</li>
+    </ul>
+
+    <p>Hypotheses:</p>
+    <ul>
+        <li>Null Hypothesis \(H_0\): The two samples are drawn from the same distribution (no drift).</li>
+        <li>Alternative Hypothesis \(H_1\): The two samples come from different distributions (drift detected).</li>
+    </ul>
+
+    <!-- Continue with other sections following the same pattern -->
+
+    <div class="page-break"></div>
+
+    <h2>4. IMPLEMENTATION</h2>
+    <p>An agentic architecture that prioritizes modularity, autonomy, and orchestration was used in the design of the AI Lifecycle Management system as shown in Figure 4.1. A Master Agent is at the center of it, coordinating a number of specialized sub-agents to manage human-AI communication, anomaly identification, drift detection, and suggested action production.</p>
+
+    <h3>4.1 System Architecture</h3>
+    <p>The system is composed of three primary agent modules:</p>
+
+    <p><strong>Drift and Anomaly Agent</strong></p>
+    <ul>
+        <li>Performs continuous validation tests (e.g., Chi-Square, KS-Test, Z-Score, Wasserstein, JS-Divergence) on feature and target data.</li>
+        <li>Detects both data drift and concept drift using historical model behavior.</li>
+        <li>Sends alerts and creates drift events in the Knowledge Manager (KM).</li>
+    </ul>
+
+    <p><strong>Suggestive Action Agent</strong></p>
+    <ul>
+        <li>Interprets outputs from the Drift and Anomaly Agent.</li>
+        <li>Suggests corrective actions such as retraining, threshold tuning, or data filtering.</li>
+        <li>Updates the KM with transcripts, action outcomes, and rationale.</li>
+    </ul>
+
+    <p><strong>Chatbot Agent</strong></p>
+    <ul>
+        <li>Acts as an interface for data scientists.</li>
+        <li>Provides updates on model health, validation results, and interpretability metrics like SHAP values.</li>
+        <li>Responds to queries and summarizes the current state of the model.</li>
+    </ul>
+
+    <p>All agents interact with a shared tooling layer for data access, schema parsing, and KM updates. The Knowledge Manager serves as a semantic store of all test results, thresholds, transcripts, alerts, and metadata.</p>
+
+    <img src="AI-LCM.drawio(3).drawio.png" alt="System Architecture" class="center">
+    <p class="center"><em>Figure 4.1: System Architecture</em></p>
+
+    <h3>4.2 Tool And Technologies Used</h3>
+    <p>The following tools and libraries were employed to build, deploy, and maintain the system:</p>
+
+    <p><strong>Core Libraries & Frameworks</strong></p>
+    <table>
+        <tr>
+            <th>Tool/Library</th>
+            <th>Purpose</th>
+        </tr>
+        <tr>
+            <td>Python 3.10+</td>
+            <td>Core language for all agents and orchestration logic.</td>
+        </tr>
+        <tr>
+            <td>FastAPI</td>
+            <td>API server for agent endpoints.</td>
+        </tr>
+        <tr>
+            <td>NumPy, SciPy, pandas</td>
+            <td>Statistical computations, drift metrics, and data handling.</td>
+        </tr>
+        <tr>
+            <td>scikit-learn</td>
+            <td>Model metrics, preprocessing, and auxiliary testing.</td>
+        </tr>
+        <tr>
+            <td>SHAP</td>
+            <td>Explainability and model interpretability analysis.</td>
+        </tr>
+        <tr>
+            <td>psutil</td>
+            <td>System usage and resource monitoring.</td>
+        </tr>
+        <tr>
+            <td>time/perf.counter</td>
+            <td>Latency tracking during inference.</td>
+        </tr>
+    </table>
+
+    <p><strong>Data & Storage</strong></p>
+    <table>
+        <tr>
+            <th>Tool/DB</th>
+            <th>Purpose</th>
+        </tr>
+        <tr>
+            <td>PostgreSQL</td>
+            <td>Structured schema logs, model metadata.</td>
+        </tr>
+        <tr>
+            <td>S3</td>
+            <td>Optional for storing large datasets and reports.</td>
+        </tr>
+    </table>
+
+    <p><strong>Scheduling & Deployment</strong></p>
+    <table>
+        <tr>
+            <th>Tool/Framework</th>
+            <th>Purpose</th>
+        </tr>
+        <tr>
+            <td>NSSM</td>
+            <td>Scheduling validation tests and retraining jobs.</td>
+        </tr>
+        <tr>
+            <td>Docker</td>
+            <td>Containerization of agents and services.</td>
+        </tr>
+        <tr>
+            <td>Kubernetes (Optional)</td>
+            <td>For scalable deployment and orchestration.</td>
+        </tr>
+    </table>
+
+    <p><strong>Visualization & Interface</strong></p>
+    <table>
+        <tr>
+            <th>Tool/Platform</th>
+            <th>Purpose</th>
+        </tr>
+        <tr>
+            <td>React</td>
+            <td>Interactive dashboards for model state and test outcomes.</td>
+        </tr>
+        <tr>
+            <td>FlaskAPI</td>
+            <td>Backend API for serving data and model endpoints.</td>
+        </tr>
+    </table>
+
+    <h3>4.3 Implementation Details</h3>
+    <p>The implementation proceeds in the following logical steps:</p>
+
+    <ol>
+        <li><strong>Model Evaluation & Explainability</strong>
+            <ul>
+                <li>Performance metrics are recalculated after any update using:
+                    <ul>
+                        <li>Classification: Accuracy, Precision, F1, ROC-AUC.</li>
+                        <li>Regression: R², MSE, RMSE.</li>
+                    </ul>
+                </li>
+                <li>SHAP values are computed to understand prediction behavior.</li>
+                <li>Explainability results are added to the ValidationTest node in the KG.</li>
+            </ul>
+        </li>
+        <li><strong>Latency & System Monitoring</strong>
+            <ul>
+                <li>Inference latency (mean, min, max, std) is logged during batch or online predictions.</li>
+                <li>CPU and memory usage are monitored using psutil, recorded under SystemUsage.</li>
+            </ul>
+        </li>
+        <li><strong>Data Ingestion & Schema Validation</strong>
+            <ul>
+                <li>The system uses the Read Schema and Fetch Data tools to validate feature types, detect missing/infinite values, and generate data quality metrics.</li>
+                <li>Results are stored under the Dataset node in the Knowledge Manager.</li>
+            </ul>
+        </li>
+        <li><strong>Drift & Anomaly Detection</strong>
+            <ul>
+                <li>The Drift and Anomaly Agent is scheduled (e.g., hourly/daily) to fetch fresh data and run:
+                    <ul>
+                        <li>Chi-Square, KS Test, Wasserstein distance, etc. on features.</li>
+                        <li>Drift detection on performance scores for concept drift.</li>
+                    </ul>
+                </li>
+                <li>If a drift threshold is exceeded, an Alert node is created in the KG and linked to the model.</li>
+            </ul>
+        </li>
+        <li><strong>Suggestive Action Generation</strong>
+            <ul>
+                <li>When an alert is logged, the Suggestive Action Agent is triggered.</li>
+                <li>It evaluates the health score and recommends actions such as:
+                    <ul>
+                        <li>Re-training with recent data.</li>
+                        <li>Triggering human validation.</li>
+                        <li>Adjusting feature ranges or thresholds.</li>
+                    </ul>
+                </li>
+                <li>All suggestions and outcomes are stored in Action and Transcript nodes.</li>
+            </ul>
+        </li>
+        <li><strong>Front End Visualization</strong>
+            <ul>
+                <li>A front end is built using <strong>FastAPI</strong> and <strong>React</strong> to visualize data, model states, alerts, and suggested actions interactively for end users.</li>
+            </ul>
+        </li>
+    </ol>
+
+    <p>The project follows a modular client-server architecture where the client components interact with the model monitoring system through API calls and data visualization layers is shown in Figure 4.2, while the backend performs real-time validation, reasoning, and storage operations. The server side is responsible for executing validation tests, storing metadata in the knowledge graph, and generating automated lifecycle reports.</p>
+
+    <img src="pivision.png" alt="Client Dashboard for NPK ML Models" class="center">
+    <p class="center"><em>Figure 4.2: Client Dashboard for NPK ML Models</em></p>
+
+    <div class="page-break"></div>
+
+    <h2>5. RESULTS AND DISCUSSION</h2>
+    <h3>5.1 Validation Test</h3>
+    <p><strong>Data Drift Results</strong></p>
+    <p>To ensure the long-term reliability and robustness of the deployed machine learning model within the manufacturing environment, a series of custom validation tests were developed. These tests focused specifically on detecting data drift in the input features over time, which can significantly affect model performance if not addressed promptly.</p>
+
+    <div class="img-container">
+        <img src="driftresults.png" alt="Data Drift Summary">
+    </div>
+
+    <p>The analysis detected drift in 6.52% of the dataset (3 out of 46 columns), indicating that most features remain stable but some significant changes have occurred. This analysis suggests that while the majority of your data pipeline remains stable, there are three lagged variables (likely from 35 time periods ago) that have shifted significantly from their baseline behavior. This could indicate changes in underlying processes, data collection methods, or system behavior that warrant investigation.</p>
+
+    <h3>5.2 Dashboard</h3>
+    <p>Dashboard for managing the AI lifecycle that offers thorough supervision and monitoring of implemented machine learning models in Figure 5.2. With important metrics such as an overall model health score of 81.97% and tracking of eight deployed models across several health statuses (healthy, warning, and critical), the interface presents a well-designed overview. Through color-coded cards that display individual model scores, the dashboard efficiently visualizes model performance. Models such as N9-K-L perform exceptionally well at 93.59, while others, like N20-N-L, display worrisome scores of 74.34.</p>
+
+    <p>For models with moderate to serious problems, the system exhibits strong monitoring capabilities with comprehensive anomaly tracking, classifying concerns into model performance, data drift, concept drift, consistency issues, latency, and system utilization. Proactive model maintenance is made possible by the recent alerts area, which offers real-time notifications about important problems such data drift surpassing thresholds and excessive memory utilization. An outstanding tool for ML operations teams to preserve model health and stop degradation over time, this all-inclusive approach to AI lifecycle management guarantees model stability and performance optimization in production situations.</p>
+
+    <img src="dashboardpage.png" alt="Dashboard Page" class="center">
+    <p class="center"><em>Figure 5.2: Dashboard Page</em></p>
+
+    <p>This page contains the complete overview of model performance for the N9 Potassium Model (Figure 5.3). It includes the Model ID (N9), Health Score (92.23), Status (Healthy), Department (NPK), Model Type (regression), and Owner.</p>
+
+    <p>The page features performance metrics tabs (Accuracy, RMSE, Health Score, System Usage) with time-series visualization charts, Recent Validation Test Results displaying accuracy percentage, CPU usage, latency, memory usage, PSI, and RMSE values. It also contains detailed system metrics including latency test results (max, mean, min response times), risk assessment data (bias, data drift, performance degradation percentages), resource utilization stats (available memory, CPU usage, total memory), concept drift monitoring, and actionable recommendations for model maintenance including rollback suggestions and retraining schedules.</p>
+
+    <img src="alertspage.png" alt="Model's Detail Page" class="center">
+    <p class="center"><em>Figure 5.3: Model's Detail Page</em></p>
+
+    <h3>5.3 Report Generation and Alerts</h3>
+    <p>The <strong>Report Generation Agent</strong> automates the creation of comprehensive model performance summaries by aggregating insights from all validation and monitoring components. This includes metrics, drift detection, system usage, and lifecycle health. The report is generated in a standardized format, ensuring consistency and clarity for audits, stakeholders, and internal review.</p>
+
+    <p><strong>Key Functions</strong></p>
+    <ul>
+        <li>Collects metrics such as R², RMSE, MAE, latency statistics, and resource utilization.</li>
+        <li>Analyzes drift results (data and concept drift) using metrics like Wasserstein distance and validation test outcomes.</li>
+        <li>Summarizes alerts and recommends corrective actions.</li>
+        <li>Outputs structured reports in PDF or HTML format for audits, stakeholders, and compliance.</li>
+    </ul>
+
+    <p><strong>Report Sections Include</strong></p>
+    <ul>
+        <li><strong>Model Details:</strong> ID, owner, department, health score.</li>
+        <li><strong>Performance Metrics:</strong> R², RMSE, MAE, and their historical trends.</li>
+        <li><strong>Latency Analysis:</strong> Mean, max, standard deviation, and spike detection.</li>
+        <li><strong>Risk Assessment:</strong> Alerts related to drift, resource bottlenecks, and concept instability.</li>
+        <li><strong>Resource Utilization:</strong> CPU and memory statistics compared to predefined thresholds.</li>
+        <li><strong>Drift Summary:</strong> Top drifted features with detailed scores (e.g., KS, JS, Wasserstein).</li>
+        <li><strong>Recommendations:</strong> SHAP-based feature analysis, retraining suggestions, and system tuning.</li>
+        <li><strong>Validation Summary:</strong> An overall conclusion from test results and health trajectory.</li>
+    </ul>
+
+    <p>The sample of the generated report (generated report contain more than 5 pages) is shown below Figure 5.4.</p>
+
+    <img src="reportsample.png" alt="Sample Report" class="center">
+    <p class="center"><em>Figure 5.4: Sample Report</em></p>
+
+    <h3>5.4 Discussion</h3>
+    <p>The proposed framework for AI/ML Lifecycle Management using Agentic AI successfully integrates modular agents, semantic knowledge manager, and automated reporting mechanisms to address key challenges in deploying and maintaining machine learning models at scale.</p>
+
+    <h4>5.4.1 Results Interpretation</h4>
+    <p>The system was evaluated on multiple ML models, and the following outcomes were observed:</p>
+
+    <ul>
+        <li><strong>Drift and Anomaly Detection:</strong> The Drift and Anomaly Agent effectively identified both data and concept drift using statistical tests such as Chi-Square, KS-Test, Z-Score, Wasserstein Distance, and JS Divergence. Detected drift was validated against synthetic and real-world test cases.</li>
+        <li><strong>System Monitoring:</strong> Latency and system usage metrics (CPU, memory) were continuously monitored. The system correctly triggered alerts when predefined thresholds were breached, ensuring early detection of performance bottlenecks.</li>
+        <li><strong>Explainability Integration:</strong> SHAP-based explanations were generated for flagged instances, providing valuable insights into the reasoning behind the model's behavior. These explanations were embedded within the report and also surfaced by the Chatbot Agent when queried.</li>
+        <li><strong>Knowledge Manager Utilization:</strong> The Knowledge Manager proved effective in storing and organizing lifecycle metadata, validation outcomes, thresholds, alerts, and suggested actions. It enabled traceability across model versions and semantic linking of related components.</li>
+        <li><strong>Automated Reporting:</strong> The Report Generation Agent produced comprehensive reports summarizing model performance, drift analysis, validation outcomes, system usage, and recommended actions. These reports were formatted in a consistent and user-friendly manner for stakeholders.</li>
+        <li><strong>User Interaction:</strong> The Chatbot Agent enabled natural language interaction, allowing users to retrieve summaries, explanations, and lifecycle insights without querying raw logs or dashboards.</li>
+    </ul>
+
+    <h4>5.4.2 Project Impact and Contribution</h4>
+    <p>This project demonstrates how combining Agentic AI and semantic knowledge manager can elevate traditional MLOps systems to intelligent, interpretable, and adaptive infrastructures. It closes critical gaps in:</p>
+
+    <ul>
+        <li><strong>Explainability and Trust:</strong> Providing interpretable diagnostics with traceable reasoning.</li>
+        <li><strong>Responsiveness:</strong> Enabling real-time detection and response to performance degradation or drift.</li>
+        <li><strong>Automation:</strong> Reducing human dependency in routine lifecycle operations such as monitoring, diagnostics, and reporting.</li>
+        <li><strong>Governance:</strong> Establishing a transparent and queryable record of model evolution and decision-making events.</li>
+    </ul>
+
+    <h4>5.4.3 Validation of Suggestive Action</h4>
+    <p>The system effectively generated context-aware suggestive actions in response to multiple alerts raised for the model N20_N_L, which recorded a health score of 74.34%. The following alerts were identified and automatically addressed with tailored recommendations:</p>
+
+    <p><strong>Data Drift</strong></p>
+    <ul>
+        <li><strong>Alert:</strong> 100% of input features showed drift, exceeding the allowable threshold of 10%.</li>
+        <li><strong>Validation of Actions:</strong>
+            <ul>
+                <li>SHAP-based feature importance analysis was conducted, confirming that a subset of features contributed disproportionately to the observed drift.</li>
+                <li>Retraining the model with recent data led to an improvement in the drift scores across several features.</li>
+                <li>Thresholds for drift alerts were reconfigured to account for naturally fluctuating variables without triggering false positives.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <p><strong>Concept Drift</strong></p>
+    <ul>
+        <li><strong>Alert:</strong> Persistent concept drift was detected, especially in the Total Nitrogen target variable, with Wasserstein distances: 0.8155, 0.9279, and 0.8328.</li>
+        <li><strong>Validation of Actions:</strong>
+            <ul>
+                <li>SHAP analysis validated that changes in the target distribution were closely tied to a subset of upstream features.</li>
+                <li>The model was retrained with the latest labeled data, resulting in reduced Wasserstein distances in subsequent monitoring cycles.</li>
+                <li>Model performance metrics (R² and RMSE) also showed stabilization post retraining.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <p><strong>System Usage</strong></p>
+    <ul>
+        <li><strong>Alert:</strong> Memory usage exceeded safe thresholds, recorded at 92.8% (threshold 75%), with CPU spikes ranging from 9.2% to 76.2%.</li>
+        <li><strong>Validation of Actions:</strong>
+            <ul>
+                <li>Memory profiling helped isolate resource-heavy components, which were optimized.</li>
+                <li>A dynamic resource allocation strategy was adopted to better manage fluctuating workloads.</li>
+                <li>After optimization, memory usage stabilized around 68-72%, and CPU fluctuation was reduced by 25%.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <p>These validations confirm that the suggestive action agent not only detects anomalies effectively but also proposes practical and impactful remedies. By combining SHAP-based explainability, drift detection, and system resource analysis, the framework supports proactive and intelligent lifecycle management.</p>
+
+    <div class="page-break"></div>
+
+    <h2>6. CONCLUSION</h2>
+    <p>This work presents a comprehensive and intelligent framework for AI/ML Lifecycle Management, driven by modular Agentic AI components and backed by a semantic Knowledge Manager. Traditional MLOps systems often face challenges such as lack of contextual traceability, delayed response to drift or degradation, and limited automation in diagnostics. By integrating agents responsible for drift detection, suggestive action planning, explainability, and user interaction, the proposed system addresses these limitations while maintaining transparency and scalability.</p>
+
+    <p>The inclusion of a Report Generation Agent ensures that all performance and validation insights are captured in a structured and consistent format for stakeholders and audit purposes. The Chatbot Agent further enhances usability by offering a natural language interface to access model status, explanations, and recommendations.</p>
+
+    <p>Additionally, the use of a Knowledge Manager enables a unified and queryable representation of the model lifecycle--including datasets, validation tests, actions, alerts, and recommendations--improving governance, reuse, and long-term model oversight.</p>
+
+    <p>Overall, the system improves the reliability, explainability, and adaptability of ML models in production. While some limitations remain--such as support only for supervised models and a lack of auto-retraining--this work lays a strong foundation for extending agent-driven MLOps into more complex, autonomous, and intelligent AI infrastructures.</p>
+
+    <p>Future extensions may explore deeper integration with active learning, reinforcement learning models, and multi-agent collaboration for large-scale deployment ecosystems.</p>
+
+    <h3>6.1 Limitations and Future Work</h3>
+    <p>While the framework provides a strong foundation, current limitations include:</p>
+
+    <ul>
+        <li>Lack of auto-retraining capabilities (limited to suggestive actions).</li>
+        <li>Support restricted to supervised learning models (regression and classification).</li>
+        <li>Scalability constraints under high-frequency, multi-model scenarios.</li>
+        <li>Dependence on external libraries (e.g., SHAP, psutil) for certain functionalities.</li>
+    </ul>
+
+    <p>Future work may include integration of active learning agents, support for reinforcement and unsupervised models, and enhancement of real-time scalability through distributed orchestration.</p>
+
+    <div class="page-break"></div>
+
+    <h2>BIBLIOGRAPHY</h2>
+    <ol>
+        <li>D. B. Acharya, K. Kuppan, and B. Divya. Agentic ai: Autonomous intelligence for complex goals-a comprehensive survey. <em>IEEE Access</em>, 2025.</li>
+        <li>D. B. Acharya, K. Kuppan, and B. Divya. Agentic ai: Autonomous intelligence for complex goals-a comprehensive survey. <em>IEEE Access</em>, 2025.</li>
+        <li>L. Aguilar, D. Dao, S. Gan, N. M. Gurel, N. Hollenstein, J. Jiang, B. Karlas, T. Lemmin, T. Li, Y. Li, et al. Ease. ml: a lifecycle management system for mldev and mlops. <em>Proceedings of Innovative Data Systems Research</em>, 2021.</li>
+        <li>A. Bodor, M. Hnida, and N. Daoudi. Machine learning models monitoring in mlops context: Metrics and tools. <em>International Journal of Interactive Mobile Technologies</em>, 17(23), 2023.</li>
+        <li>A. Botchkarev. A new typology design of performance metrics to measure errors in machine learning regression algorithms. <em>Interdisciplinary Journal of Information, Knowledge, and Management</em>, 14:045-076, 2019.</li>
+        <li>T. R. Hoens, R. Polikar, and N. V. Chawla. Learning from streaming data with concept drift and imbalance: an overview. <em>Progress in Artificial Intelligence</em>, 1:89-101, 2012.</li>
+        <li>W. Hummer, V. Muthusamy, T. Rausch, P. Dube, K. El Maghraoui, A. Murthi, and P. Oum. Modelops: Cloud-based lifecycle management for reliable and trusted ai. In <em>2019 IEEE International Conference on Cloud Engineering (IC2E)</em>, pages 113-120. IEEE, 2019.</li>
+        <li>D. Nigenda, Z. Karnin, M. B. Zafar, R. Ramesha, A. Tan, M. Donini, and K. Kenthapadi. Amazon sagemaker model monitor: A system for real-time insights into deployed machine learning models. In <em>Proceedings of the 28th ACM SIGKDD Conference on Knowledge Discovery and Data Mining</em>, pages 3671-3681, 2022.</li>
+        <li>D. Nogare and I. F. Silveira. Experimentation, deployment and monitoring machine learning models: Approaches for applying mlops. <em>arXiv preprint arXiv:2408.11112</em>, 2024.</li>
+        <li>S. Shankar and A. G. Parameswaran. Towards observability for machine learning pipelines. 2022.</li>
+        <li>N. Wang, H. Zhang, A. Dahal, W. Cheng, M. Zhao, and L. Lombardo. On the use of explainable ai for susceptibility modeling: Examining the spatial pattern of shap values. <em>Geoscience Frontiers</em>, 15(4):101800, 2024.</li>
+        <li>Y. Xie, L. Cruz, P. Heck, and J. S. Rellermeyer. Systematic mapping study on the machine learning lifecycle. In <em>2021 IEEE/ACM 1st workshop on AI engineering-software engineering for AI (WAIN)</em>, pages 70-73. IEEE, 2021.</li>
+    </ol>
+
+    <div class="center" style="margin-top:50px;margin-left:auto;text-align:center">
+        <div class="footer-container">
+            <a href="https://github.com/kunalgokhe" target="_blank">
+                <div class="footer">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" widht="25" height="25"><path fill="#ffffff" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3 .3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5 .3-6.2 2.3zm44.2-1.7c-2.9 .7-4.9 2.6-4.6 4.9 .3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3 .7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3 .3 2.9 2.3 3.9 1.6 1 3.6 .7 4.3-.7 .7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3 .7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3 .7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+                </div>
+            </a>
+            <a href="https://wa.me/+917066123727" target="_blank">
+                <div class="footer">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" widht="25" height="25"><path fill="#ffffff" d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+                </div>
+            </a>
+            <a href="https://www.linkedin.com/in/kunalgokhe/" target="_blank">
+                <div class="footer">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" widht="25" height="25"><path fill="#ffffff" d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+                </div>
+            </a>
+            <a href="mailto:kunalgokhe@gmail.com" target="_blank">
+                <div class="footer">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512" widht="25" height="25"><path fill="#ffffff" d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"/></svg>
+                </div>
+            </a>
+            <a href="https://www.kaggle.com/kunalgokhe" target="_blank">
+                <div class="footer">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" widht="25" height="25"><path fill="#ffffff" d="M304.2 501.5L158.4 320.3 298.2 185c2.6-2.7 1.7-10.5-5.3-10.5h-69.2c-3.5 0-7 1.8-10.5 5.3L80.9 313.5V7.5q0-7.5-7.5-7.5H21.5Q14 0 14 7.5v497q0 7.5 7.5 7.5h51.9q7.5 0 7.5-7.5v-109l30.8-29.3 110.5 140.6c3 3.5 6.5 5.3 10.5 5.3h66.9q5.3 0 6-3z"/></svg>
+                </div>
+            </a>
+        </div>
+        <br>
+        Made With ❤️ By Kunal
+        <br>
+    </div>
+    <link rel="stylesheet" href="../../styles/cursor.css">
+    <div id="cursor" class="Cursor"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="../../scripts/cursor.js"></script>
+</body>
+</html>
