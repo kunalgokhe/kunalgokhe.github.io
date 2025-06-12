@@ -6,7 +6,18 @@
     <title>AI/ML Lifecycle Management using Agentic AI</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <style>
+    <link rel="stylesheet" href="./style.css">
+    <script>
+    function detectDevice() {
+        const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+        console.log("Device:", isMobile ? "Mobile" : "Desktop");
+    }
+
+    window.addEventListener("DOMContentLoaded", detectDevice);
+    </script>
+
+
+    <!-- <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
             margin: 0px;
@@ -93,12 +104,14 @@
             page-break-before: always;
             margin-top: 50px;
         }
-    </style>
+    </style> -->
+    
 </head>
 <body>
     
-    <header">
-      <h1>AI/ML Lifecycle Management using Agentic AI</h1>
+    <header style="display: flex; align-items: center; justify-content: space-between;">
+        <h1 style="margin: 0;">AI/ML Lifecycle Management using Agentic AI</h1>
+        <button class="load-more-btn" onclick="window.location.href='https://kunalgokhe.github.io'">Explore More!</button>
     </header>
 
     <h2>ABSTRACT</h2>
